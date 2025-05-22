@@ -9,24 +9,46 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffdde1;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
             color: #b22222;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
         }
+
         h1 {
             font-size: 3em;
             text-align: center;
-            position: relative;
             animation: fadeIn 3s ease-in-out;
         }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+
+        .progress-container {
+            margin-top: 30px;
+            width: 80%;
+            background-color: #ffe5e5;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        .progress-bar {
+            height: 30px;
+            width: 60%;
+            background-color: #ff6f61;
+            animation: progressGrow 3s ease-in-out;
+        }
+
+        .progress-text {
+            margin-top: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #b22222;
+            animation: fadeIn 4s ease-in-out;
+        }
+
         .heart {
             position: absolute;
             width: 50px;
@@ -35,6 +57,7 @@
             transform: rotate(45deg);
             animation: float 5s infinite;
         }
+
         .heart::before,
         .heart::after {
             content: '';
@@ -46,10 +69,12 @@
             top: -25px;
             left: 0;
         }
+
         .heart::after {
             top: 0;
             left: -25px;
         }
+
         @keyframes float {
             0% {
                 transform: translateY(0) rotate(45deg);
@@ -63,36 +88,32 @@
                 opacity: 0;
             }
         }
-        .heart:nth-child(1) {
-            left: 10%;
-            animation-delay: 0s;
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
-        .heart:nth-child(2) {
-            left: 30%;
-            animation-delay: 1s;
-            width: 40px;
-            height: 40px;
+
+        @keyframes progressGrow {
+            from { width: 0%; }
+            to { width: 60%; }
         }
-        .heart:nth-child(3) {
-            left: 50%;
-            animation-delay: 2s;
-            width: 60px;
-            height: 60px;
-        }
-        .heart:nth-child(4) {
-            left: 70%;
-            animation-delay: 3s;
-        }
-        .heart:nth-child(5) {
-            left: 90%;
-            animation-delay: 4s;
-            width: 30px;
-            height: 30px;
-        }
+
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 30%; animation-delay: 1s; width: 40px; height: 40px; }
+        .heart:nth-child(3) { left: 50%; animation-delay: 2s; width: 60px; height: 60px; }
+        .heart:nth-child(4) { left: 70%; animation-delay: 3s; }
+        .heart:nth-child(5) { left: 90%; animation-delay: 4s; width: 30px; height: 30px; }
     </style>
 </head>
 <body>
     <h1>❤️ Ti Amo al 60% ❤️</h1>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+    <div class="progress-text">Incoming... Scadenza: 25/05</div>
+
     <div class="heart"></div>
     <div class="heart"></div>
     <div class="heart"></div>
@@ -100,3 +121,4 @@
     <div class="heart"></div>
 </body>
 </html>
+
