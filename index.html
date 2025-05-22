@@ -22,7 +22,7 @@
         h1 {
             font-size: 3em;
             text-align: center;
-            animation: fadeIn 3s ease-in-out;
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
         .progress-container {
@@ -36,9 +36,8 @@
 
         .progress-bar {
             height: 30px;
-            width: 60%;
             background-color: #ff6f61;
-            animation: progressGrow 3s ease-in-out;
+            transition: width 1s ease-in-out;
         }
 
         .progress-text {
@@ -49,76 +48,35 @@
             animation: fadeIn 4s ease-in-out;
         }
 
-        .heart {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: #ff6f61;
-            transform: rotate(45deg);
-            animation: float 5s infinite;
-        }
-
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: #ff6f61;
-            border-radius: 50%;
-            top: -25px;
-            left: 0;
-        }
-
-        .heart::after {
-            top: 0;
-            left: -25px;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(45deg);
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-200px) rotate(45deg);
-                opacity: 0;
-            }
-        }
-
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
 
-        @keyframes progressGrow {
-            from { width: 0%; }
-            to { width: 60%; }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ff6f61; }
+            to { text-shadow: 0 0 20px #ff3e3e; }
         }
-
-        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .heart:nth-child(2) { left: 30%; animation-delay: 1s; width: 40px; height: 40px; }
-        .heart:nth-child(3) { left: 50%; animation-delay: 2s; width: 60px; height: 60px; }
-        .heart:nth-child(4) { left: 70%; animation-delay: 3s; }
-        .heart:nth-child(5) { left: 90%; animation-delay: 4s; width: 30px; height: 30px; }
     </style>
 </head>
 <body>
-    <h1>❤️ Ti Amo al 60% ❤️</h1>
+    <h1 id="loveLevel">❤️ Ti Amo al 60% ❤️</h1>
 
     <div class="progress-container">
-        <div class="progress-bar"></div>
+        <div id="progressBar" class="progress-bar"></div>
     </div>
     <div class="progress-text">Incoming... Scadenza: 25/05</div>
 
-    <div class="heart"></div>
-    <div class="heart"></div>
-    <div class="heart"></div>
-    <div class="heart"></div>
-    <div class="heart"></div>
+    <script>
+        const startDate = new Date("2024-05-20"); // giorno base 60%
+        const endDate = new Date("2024-05-25");
+        const today = new Date();
+
+        const daysPassed = Math.min(Math.max(0, Math.floor((today - startDate) / (1000 * 60 * 60 * 24))), 5);
+        const lovePercent = 60 + daysPassed * 1;
+
+        document.getElementById("loveLevel").textContent = `❤️ Ti Amo al ${lovePercent}% ❤️`;
+        document.getElementById("progressBar").style.width = `${lovePercent}%`;
+    </script>
 </body>
 </html>
-
